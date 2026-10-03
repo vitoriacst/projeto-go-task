@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { HeaderComponent, MainContentComponent } from './components';
+import {
+  HeaderComponent,
+  MainContentComponent,
+  TaskFormModalComponent,
+} from './components';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, MainContentComponent],
+  imports: [HeaderComponent, MainContentComponent, TaskFormModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
