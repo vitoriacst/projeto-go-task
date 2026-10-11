@@ -12,6 +12,9 @@ export class WelcomeSectionComponent {
 
   openNewTaskModal() {
     console.log('chamouu');
-    this._modalControllerService.openNewTaskModal();
+    const dialogRef = this._modalControllerService.openNewTaskModal();
+    dialogRef.closed.subscribe((taskForm) => {
+      console.log('Tarefa Criada', taskForm);
+    });
   }
 }

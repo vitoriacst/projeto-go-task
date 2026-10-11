@@ -1,19 +1,9 @@
 import { Component } from '@angular/core';
-import {
-  HeaderComponent,
-  MainContentComponent,
-  TaskCommentsModalComponent,
-  TaskFormModalComponent,
-} from './components';
+import { HeaderComponent, MainContentComponent } from './components';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    HeaderComponent,
-    MainContentComponent,
-    TaskFormModalComponent,
-    TaskCommentsModalComponent,
-  ],
+  imports: [HeaderComponent, MainContentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
