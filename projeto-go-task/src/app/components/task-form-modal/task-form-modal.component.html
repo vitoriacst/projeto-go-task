@@ -1,4 +1,9 @@
-<form action="" class="rounded-l-xl overflow-hidden bg-white">
+<form
+  action=""
+  class="rounded-l-xl overflow-hidden bg-white"
+  [formGroup]="tasKForm"
+  (ngSubmit)="onFormSubmit()"
+>
   <div class="flex gap-1 items-center p-4">
     <img src="images/icon-new-task.svg" alt="" />
     <h1 class="font-semibold text-lg">Criar/editar tarefa</h1>
@@ -8,6 +13,7 @@
     <div>
       <p class="font-semibold text-sm mb-2">Nome</p>
       <input
+        formControlName="name"
         class="w-full border-[#D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919F]"
         type="text"
         placeholder="descreva o que deverá ser feito"
@@ -22,6 +28,7 @@
         class="w-full border-[#D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919F]"
         type="text"
         placeholder="Adicione uma descrição"
+        formControlName="description"
       />
       <p class="font-semibold text-sm text-red-500">
         O campo é obrigatório e precisa ter no minimo 10 caracteres
@@ -35,8 +42,14 @@
         Cancelar
       </button>
       <button
-        class="py-3 px-4 bg-[#2A89EF] rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50 text-white"
+        class="py-3 px-4 rounded-xl text-sm font-semibold cursor-pointer text-white"
+        [class]="
+          tasKForm.invalid
+            ? 'py-3 px-4 rounded-xl text-sm font-semibold cursor-pointer text-white bg-[#d7d8d8]'
+            : 'py-3 px-4 rounded-xl text-sm font-semibold cursor-pointer text-white active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50 bg-[#2A89EF]'
+        "
         type="submit"
+        [disabled]="tasKForm.invalid"
       >
         Salvar alterações
       </button>

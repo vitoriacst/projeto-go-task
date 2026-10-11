@@ -4,6 +4,7 @@ import {
   TaskCommentsModalComponent,
   TaskFormModalComponent,
 } from '../components';
+import { ITaskFormControls } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -21,15 +22,20 @@ export class ModalControllerService {
       ...this.modalSizeOptions,
       data: {
         mode: 'create',
+        formValues: {
+          name: '',
+          description: '',
+        },
       },
     });
   }
 
-  openEditTaskModal() {
+  openEditTaskModal(formValues: ITaskFormControls) {
     return this._dialog.open(TaskFormModalComponent, {
       ...this.modalSizeOptions,
       data: {
         mode: 'edit',
+        formValues,
       },
     });
   }
