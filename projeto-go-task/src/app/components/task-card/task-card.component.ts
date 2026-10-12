@@ -10,11 +10,11 @@ import { TaskService } from '../../services/task.service';
   styleUrl: './task-card.component.css',
 })
 export class TaskCardComponent {
+  @Input({ required: true }) task!: Itask;
+
   private readonly _modalControllerService = inject(ModalControllerService);
 
   private readonly _taksServie = inject(TaskService);
-
-  @Input({ required: true }) task!: Itask;
 
   openEditTaskModal() {
     const dialogRef = this._modalControllerService.openEditTaskModal({
@@ -34,6 +34,17 @@ export class TaskCardComponent {
   }
 
   openTaskCommentsModal() {
-    this._modalControllerService.openTaskCommentsModal(this.task);
+    const dialogRef = this._modalControllerService.openTaskCommentsModal(
+      this.task,
+    );
+    dialogRef.closed.subscribe((taskCommentsChanged) => {
+      if (taskCommentsChanged) {
+        this._taksServie.updateTaskComments(
+          this.task.id,
+          this.task.status,
+          this.task.comments,
+        );
+      }
+    });
   }
 }

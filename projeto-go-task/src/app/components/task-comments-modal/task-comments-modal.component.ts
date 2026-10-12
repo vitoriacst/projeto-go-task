@@ -1,6 +1,8 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IComment, Itask } from '../../interfaces/task.interface';
+import { generateUniqueIdWithTimestamp } from '../../utils/generate-unique-id-with-timestamp';
 
 @Component({
   selector: 'app-task-comments-modal',
@@ -9,13 +11,28 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './task-comments-modal.component.css',
 })
 export class TaskCommentsModalComponent {
-  readonly _task = inject(DIALOG_DATA);
+  readonly _task: Itask = inject(DIALOG_DATA);
+
+  readonly _dialogRef: DialogRef<boolean> = inject(DialogRef);
+
+  hasComments = false;
 
   commentsControl = new FormControl('', [Validators.required]);
 
-  onAddComment() {}
+  onAddComment() {
+    const newComment: IComment = {
+      id: generateUniqueIdWithTimestamp(),
+      description: this.commentsControl.value ? this.commentsControl.value : '',
+    };
 
-  onRemoveComment(arg0: any) {
-    throw new Error('Method not implemented.');
+    this._task.comments.unshift(newComment);
+
+    this.commentsControl.reset();
+
+    this.hasComments = true;
+  }
+
+  onCloseModal() {
+    this._dialogRef.close(this.hasComments);
   }
 }
