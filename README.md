@@ -7,7 +7,6 @@
   <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge" alt="Status" />
 </p>
 
-> Aplicação moderna e responsiva de gerenciamento de tarefas no estilo Kanban, desenvolvida em **Angular** com foco em boas práticas de componentização, reatividade e experiência do usuário. Projeto prático desenvolvido durante a **Formação Angular da Rocketseat**.
 
 ---
 
