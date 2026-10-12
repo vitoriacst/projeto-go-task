@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IComment, Itask } from '../../interfaces/task.interface';
 import { generateUniqueIdWithTimestamp } from '../../utils/generate-unique-id-with-timestamp';
@@ -19,6 +19,8 @@ export class TaskCommentsModalComponent {
 
   commentsControl = new FormControl('', [Validators.required]);
 
+  @ViewChild('commentInput') commentInputRef!: ElementRef<HTMLInputElement>;
+
   onAddComment() {
     const newComment: IComment = {
       id: generateUniqueIdWithTimestamp(),
@@ -30,6 +32,8 @@ export class TaskCommentsModalComponent {
     this.commentsControl.reset();
 
     this.hasComments = true;
+
+    this.commentInputRef.nativeElement.focus();
   }
 
   onCloseModal() {
