@@ -32,4 +32,8 @@ export class TaskCardComponent {
       }
     });
   }
+
+  openTaskCommentsModal() {
+    this._modalControllerService.openTaskCommentsModal(this.task);
+  }
 }
