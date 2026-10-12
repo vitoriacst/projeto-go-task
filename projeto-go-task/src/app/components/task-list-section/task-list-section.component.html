@@ -2,10 +2,6 @@
 @let doingTasks = (this._taskService.doingTasks | async) ?? [];
 @let doneTasks = (this._taskService.doneTasks | async) ?? [];
 
-<p>TODO: {{ this._taskService.todoTasks | async | json }}</p>
-<p>DOING: {{ this._taskService.doingTasks | async | json }}</p>
-<p>DONE: {{ this._taskService.doneTasks | async | json }}</p>
-
 @let noTasksCreated =
   todoTasks.length === 0 && doingTasks.length === 0 && doneTasks.length === 0;
 
