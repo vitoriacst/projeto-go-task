@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { TaskStatusEnum } from '../enums';
 import { ITaskFormControls } from '../interfaces';
-import { Itask } from '../interfaces/task.interface';
+import { IComment, Itask } from '../interfaces/task.interface';
 import { taskStatus } from '../types/task.status';
 import { generateUniqueIdWithTimestamp } from '../utils/generate-unique-id-with-timestamp';
 
@@ -56,6 +56,27 @@ export class TaskService {
         ...updateTaskList[currentTaskIndex],
         name: newTaskName,
         description: newTaskDescription,
+      };
+
+      currentTaskList.next(updateTaskList);
+    }
+  }
+
+  updateTaskComments(
+    taskId: string,
+    taskStatus: taskStatus,
+    newTaskComments: IComment[],
+  ) {
+    const currentTaskList = this.getTaskListByStatus(taskStatus);
+    const currentTaskIndex = currentTaskList.value.findIndex(
+      (task) => task.id === taskId,
+    );
+    if (currentTaskIndex > -1) {
+      const updateTaskList = [...currentTaskList.value];
+
+      updateTaskList[currentTaskIndex] = {
+        ...updateTaskList[currentTaskIndex],
+        comments: [...newTaskComments],
       };
 
       currentTaskList.next(updateTaskList);
