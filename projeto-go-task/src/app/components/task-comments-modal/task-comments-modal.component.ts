@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, ElementRef, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IComment, Itask } from '../../interfaces/task.interface';
 import { generateUniqueIdWithTimestamp } from '../../utils/generate-unique-id-with-timestamp';
@@ -34,6 +34,14 @@ export class TaskCommentsModalComponent {
     this.hasComments = true;
 
     this.commentInputRef.nativeElement.focus();
+  }
+
+  onRemoveModal(commentId: string) {
+    this._task.comments = this._task.comments.filter((comment) => {
+      commentId !== commentId;
+    });
+
+    this.hasComments = true;
   }
 
   onCloseModal() {
