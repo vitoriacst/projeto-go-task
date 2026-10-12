@@ -14,16 +14,16 @@ export class TaskCardComponent {
 
   private readonly _modalControllerService = inject(ModalControllerService);
 
-  private readonly _taksServie = inject(TaskService);
+  private readonly _taskServie = inject(TaskService);
 
-  openEditTaskModal() {
+  oenEditTaskModal() {
     const dialogRef = this._modalControllerService.openEditTaskModal({
       name: this.task.name,
       description: this.task.description,
     });
     dialogRef.closed.subscribe((taskform) => {
       if (taskform) {
-        this._taksServie.updateTaskData(
+        this._taskServie.updateTaskData(
           this.task.id,
           this.task.status,
           taskform.name,
@@ -39,12 +39,16 @@ export class TaskCardComponent {
     );
     dialogRef.closed.subscribe((taskCommentsChanged) => {
       if (taskCommentsChanged) {
-        this._taksServie.updateTaskComments(
+        this._taskServie.updateTaskComments(
           this.task.id,
           this.task.status,
           this.task.comments,
         );
       }
     });
+  }
+
+  deleteTask() {
+    this._taskServie.deleteTask(this.task.id, this.task.status);
   }
 }
