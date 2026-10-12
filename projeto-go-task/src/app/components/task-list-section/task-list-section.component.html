@@ -6,6 +6,15 @@
 <p>DOING: {{ this._taskService.doingTasks | async | json }}</p>
 <p>DONE: {{ this._taskService.doneTasks | async | json }}</p>
 
+@let noTasksCreated =
+  todoTasks.length === 0 && doingTasks.length === 0 && doneTasks.length === 0;
+
+@let todoTaskQuantity = todoTasks.length;
+
+@let doingTaskQuantity = doingTasks.length;
+
+@let doneTaskQuantity = doneTasks.length;
+
 <div class="mb-6 flex overflow-x-auto scrollbar-hidden">
   <div
     class="flex-1 py-3 px-6 min-w-60 flex flex-col gap-6"
@@ -20,8 +29,9 @@
       <h1 class="font-bold">To do</h1>
       <span
         class="text-xs font-semibold text-white bg-black py-1 px-2 rounded-xl"
-        >1</span
       >
+        {{ todoTaskQuantity }}
+      </span>
     </div>
     <div class="flex flex-col gap-4">
       @for (todoTask of todoTasks; track todoTask.id) {
@@ -43,7 +53,7 @@
       <h1 class="font-bold">In Progress</h1>
       <span
         class="text-xs font-semibold text-white bg-[#FF850A] py-1 px-2 rounded-xl"
-        >1</span
+        >{{ doingTaskQuantity }}</span
       >
     </div>
     <div class="flex flex-col gap-4">
@@ -65,7 +75,7 @@
       <h1 class="font-bold">Done</h1>
       <span
         class="text-xs font-semibold text-white bg-[#15BE78] py-1 px-2 rounded-xl"
-        >1</span
+        >{{ doneTaskQuantity }}</span
       >
     </div>
     <div class="flex flex-col gap-4">
@@ -76,8 +86,10 @@
   </div>
 </div>
 
-<div class="bg=[#FAFAFA] rounded-sm py-3 px-5 border-l-4 border-black">
-  <p class="font-semibold text-lg text[#9CA3AF]">
-    Nenhuma Tarefa disponível no momento.
-  </p>
-</div>
+@if (noTasksCreated) {
+  <div class="bg=[#FAFAFA] rounded-sm py-3 px-5 border-l-4 border-black">
+    <p class="font-semibold text-lg text[#9CA3AF]">
+      Nenhuma Tarefa disponível no momento.
+    </p>
+  </div>
+}
